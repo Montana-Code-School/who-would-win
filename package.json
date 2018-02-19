@@ -3,19 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.2",
-    "nodemon": "^1.15.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"
   },
   "scripts": {
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrenty --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "concurrently": "^3.5.1"
   }
 }
