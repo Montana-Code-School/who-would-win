@@ -7,13 +7,6 @@
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
 .App-title {
   font-size: 1.5em;
 }
@@ -23,6 +16,25 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  align: center;
+  height: 500px;
+  width: 500px;
+  padding: 20px;
+}
+
+body {
+  background-image: url("https://orig00.deviantart.net/a68d/f/2011/262/1/4/kombat_tomb___empty_version_by_molim-d4ablz9.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }

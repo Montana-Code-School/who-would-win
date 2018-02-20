@@ -64,10 +64,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Choose Your Victor!</h1>
         </header>
         <p className="App-intro">{this.state.response}</p>
-        <img src={this.state.playerOneURL} alt='Fighter One'/><img src={this.state.playerTwoURL} alt='Fighter Two'/>
+        <img id='fighterOne' src={this.state.playerOneURL} alt='Fighter One'/>
+        <img id='fighterTwo' src={this.state.playerTwoURL} alt='Fighter Two'/>
       </div>
     );
   }
