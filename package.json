@@ -3,17 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "concurrently": "^3.5.1",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.6",
+    "nodemon": "^1.15.1",
+    "path": "^0.12.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "webpack": "^3.11.0"
   },
   "scripts": {
     "client": "cd client && npm start",
-    "server": "nodemon server.js",
+    "server": "./node_modules/nodemon/bin/nodemon.js server.js",
     "dev": "concurrenty --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "http://localhost:5000/"
+
   }
 }
