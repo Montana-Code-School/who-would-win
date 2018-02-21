@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import random from './random.js';
 
 
 class App extends Component {
@@ -13,36 +14,49 @@ class App extends Component {
       playerOneURL: ``,
       playerTwoURL: ``,
       countOne: 0,
-      countTwo: 0
+      countTwo: 0,
+      message: "",
+      ranNum: random.getRandomInt(1, 50)
     }
   }
+
 onClickOne(e) {
+  console.log(this.state.ranNum)
+  if (this.state.countOne === this.state.ranNum){
   this.setState({
-    countOne: this.state.countOne + 1
-  });
+    message: 'fighter one wins!'
+  })} else {
+    this.setState({
+      countOne: this.state.countOne + 1
+    })
+  }
 }
-
 onClickTwo(e) {
+  console.log(this.state.ranNum)
+  if (this.state.countTwo === this.state.ranNum){
   this.setState({
-    countTwo: this.state.countTwo + 1
-  });
+    message: 'fighter two wins!'
+  })} else {
+    this.setState({
+      countTwo: this.state.countTwo + 1
+    })
+  }
  }
 
- handleClick(e) {
-   const clicked = e.target.dataset.id
-   if (this.state.countOne(clicked) || this.state.countTwo(clicked) === 3) {
-     this.setState({
-       message: 'You win!'
-     })
-   }
- }
+ // handleClick(e) {
+ //   if (this.state.countOne === 3) {
+ //     this.setState({
+ //       Message: "You Win!"
+ //     })
+ //   }
+ // }
 
   componentDidMount() {
+    console.log(random.getRandomInt(1, 10))
     this.callToPixabay()
     .then((res) => {
       console.log(res)
       this.setState({ playerOneURL: res.hits[Math.floor(Math.random() * 49)].webformatURL})
-
     })
     .catch(err => console.error(err))
 
@@ -52,7 +66,6 @@ onClickTwo(e) {
       this.setState({ playerTwoURL: res.hits[Math.floor(Math.random() * 49)].webformatURL})
     })
     .catch(err => console.error(err))
-
   }
 
   getAnimalArr () {
@@ -94,8 +107,9 @@ onClickTwo(e) {
         <img id='fighterTwo' src={this.state.playerTwoURL} alt='Fighter Two'/>
         <h1 className="countOne">{this.state.countOne}</h1>
         <h1 className="countTwo">{this.state.countTwo}</h1>
-        <button onClick = {this.onClickOne}>Fighter One</button>
-        <button onClick = {this.onClickTwo}>Fighter Two</button>
+        <h4 className="winningMessage">{this.state.message}</h4>
+        <button id="fO" type='button' className="fighterOne" onClick = {this.onClickOne}>Fighter One</button>
+        <button id="fT" type='button' className="fighterTwo" onClick = {this.onClickTwo}>Fighter Two</button>
       </div>
     );
   }

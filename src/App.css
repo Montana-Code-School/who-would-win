@@ -31,10 +31,20 @@ img {
   padding: 20px;
 }
 
+button {
+  text-decoration: none;
+  font-size: 35px;
+  display: inline-block;
+  text-align: center;
+}
+
+#fO {}
+
 body {
   background-image: url("https://orig00.deviantart.net/a68d/f/2011/262/1/4/kombat_tomb___empty_version_by_molim-d4ablz9.jpg");
   background-size: 100%;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-position: center center;
   height: 100%;
   width: 100%;
 }
