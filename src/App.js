@@ -24,7 +24,7 @@ onClickOne(e) {
   console.log(this.state.ranNum)
   if (this.state.countOne === this.state.ranNum){
   this.setState({
-    message: 'fighter one wins!'
+    message: 'Fighter One Wins!'
   })} else {
     this.setState({
       countOne: this.state.countOne + 1
@@ -35,7 +35,7 @@ onClickTwo(e) {
   console.log(this.state.ranNum)
   if (this.state.countTwo === this.state.ranNum){
   this.setState({
-    message: 'fighter two wins!'
+    message: 'Fighter Two Wins!'
   })} else {
     this.setState({
       countTwo: this.state.countTwo + 1
@@ -105,8 +105,9 @@ onClickTwo(e) {
         <p className="App-intro">{this.state.response}</p>
         <img id='fighterOne' src={this.state.playerOneURL} alt='Fighter One'/>
         <img id='fighterTwo' src={this.state.playerTwoURL} alt='Fighter Two'/>
-        <h1 className="countOne">{this.state.countOne}</h1>
-        <h1 className="countTwo">{this.state.countTwo}</h1>
+        <br />
+        <h1 id="derp" className="countOne">{this.state.countOne}</h1>
+        <h1 id="derp"className="countTwo">{this.state.countTwo}</h1>
         <h4 className="winningMessage">{this.state.message}</h4>
         <button id="fO" type='button' className="fighterOne" onClick = {this.onClickOne}>Fighter One</button>
         <button id="fT" type='button' className="fighterTwo" onClick = {this.onClickTwo}>Fighter Two</button>

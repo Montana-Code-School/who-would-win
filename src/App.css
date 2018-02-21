@@ -26,9 +26,14 @@
 
 img {
   align: center;
-  height: 500px;
+  height: 400px;
   width: 500px;
   padding: 20px;
+}
+
+#derp {
+  align: center;
+  display: inline-block;
 }
 
 button {
@@ -38,7 +43,12 @@ button {
   text-align: center;
 }
 
-#fO {}
+#fO {
+  float: left;
+  margin-left: 24.5%;
+}
+
+#fT {}
 
 body {
   background-image: url("https://orig00.deviantart.net/a68d/f/2011/262/1/4/kombat_tomb___empty_version_by_molim-d4ablz9.jpg");
@@ -47,4 +57,20 @@ body {
   background-position: center center;
   height: 100%;
   width: 100%;
+}
+
+.countOne {
+  color: white;
+  padding-right: 18%;
+}
+
+.countTwo {
+  color: white;
+  padding-left: 18%;
+}
+
+.winningMessage {
+  text-shadow: -2px 0 white, 2px 0 white, 2px 0 white, 0 -2px white;
+  font-size: 35px;
+  color: #39ff14;
 }
