@@ -1,5 +1,6 @@
+import wins from '../../models/Win.js'
 const express = require('express');
-
+import mongoose from 'mongoose'
 const app = express();
 const port = process.env.PORT || 5000;
 const router = express.Router();
@@ -8,17 +9,17 @@ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express'})
 });
 
-router.route('/api/match')
+router.route('/api/matchVote')
   .post(({
     body
   }, res) => {
-    const match = new match();
-    match.name = body.name;
-    match.save(err => {
+    const matchVote = new matchVote();
+    matchVote.name = body.name;
+    matchVote.save(err => {
       if (err)
         res.send(err);
       res.json({
-        message: 'match created!'
+        message: 'matchVote created!'
       });
     })
   })
