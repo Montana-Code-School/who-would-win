@@ -2,7 +2,18 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import random from './random.js';
-
+import axios from 'axios'
+const dbref = {
+  fish: "5a8f240f4af70b24d36df962",
+  dogs: "5a8f247328bb6524e8db5c20",
+  cats: "5a8f24ae2ba93c24f9ebd131",
+  dinosaurs: "5a8f154f78482e22f85deea5",
+  birds: "5a8f2509e6782b250eea0684",
+  rodents: "5a8f253797f71b251c6eb0c6",
+  reptiles: "5a8f255c53e107252a578c0b",
+  insects: "5a8f25dc950d3b255063b1dd",
+  primate: "5a8f2604f652682568347261",
+}
 
 class App extends Component {
   constructor() {
@@ -16,16 +27,24 @@ class App extends Component {
       countOne: 0,
       countTwo: 0,
       message: "",
-      ranNum: random.getRandomInt(1, 50)
+      ranNum: random.getRandomInt(1, 1),
+      fighterOne: "",
+      fighterTwo: ""
     }
   }
+
 
 onClickOne(e) {
   console.log(this.state.ranNum)
   if (this.state.countOne === this.state.ranNum){
-  this.setState({
-    message: 'Fighter One Wins!'
-  })} else {
+    this.setState({
+      message: 'Fighter One Wins!'
+    })
+    axios.post('http://localhost:5000/api/increment-win/' + dbref[this.state.fighterOne]).then(() => {
+      console.log("works")
+    })
+    document.getElementById('fO').style.display = "none";
+    } else {
     this.setState({
       countOne: this.state.countOne + 1
     })
@@ -34,36 +53,48 @@ onClickOne(e) {
 onClickTwo(e) {
   console.log(this.state.ranNum)
   if (this.state.countTwo === this.state.ranNum){
-  this.setState({
-    message: 'Fighter Two Wins!'
-  })} else {
+    this.setState({
+      message: 'Fighter Two Wins!'
+    })
+  } else {
     this.setState({
       countTwo: this.state.countTwo + 1
     })
-  }
+   }
  }
 
- // handleClick(e) {
- //   if (this.state.countOne === 3) {
- //     this.setState({
- //       Message: "You Win!"
- //     })
- //   }
- // }
+
+componentShouldUpdate() {
+  if (this.state.countTwo === this.state.ranNum) {
+    this.setState({
+      message: 'Fighter Two Wins!'
+    })
+  } else if (this.state.countOne === this.state.ranNum) { 
+    this.setState({
+      message: 'Fighter One Wins'
+    })
+  }
+}
 
   componentDidMount() {
     console.log(random.getRandomInt(1, 10))
     this.callToPixabay()
     .then((res) => {
-      console.log(res)
-      this.setState({ playerOneURL: res.hits[Math.floor(Math.random() * 49)].webformatURL})
+      console.log(res.body)
+      this.setState({
+        playerOneURL: res.body.hits[Math.floor(Math.random() * 49)].webformatURL,
+        fighterOne: res.searchParamater
+      })
     })
     .catch(err => console.error(err))
 
     this.callToPixabay()
     .then((res) => {
-      console.log(res)
-      this.setState({ playerTwoURL: res.hits[Math.floor(Math.random() * 49)].webformatURL})
+      console.log(res.body)
+      this.setState({
+        playerTwoURL: res.body.hits[Math.floor(Math.random() * 49)].webformatURL,
+        fighterTwo: res.searchParamater
+      })
     })
     .catch(err => console.error(err))
   }
@@ -92,7 +123,10 @@ onClickTwo(e) {
 
     if (response.status !== 200) throw Error(body.message);
 
-    return body;
+    return {
+      body,
+      searchParamater
+    };
   };
 
   render() {
