@@ -7,6 +7,7 @@ const router = express.Router();
 const cors = require('cors');
 const mongoose = require('mongoose');
 app.use(cors());
+app.options('*', cors());
 mongoose.connect("mongodb://localhost/clicker-win");
 
 app.use(bodyParser.urlencoded({
@@ -18,19 +19,7 @@ app.get('/win', (req, res) => {
   res.send({ express: 'Hello From Express'})
 });
 
-router.route('/increment-win/:obj_id')
-  // .post((req, res) => {
-  //   const win = new Win();
-  //   win.primate = 0;
-  //   win.save(err => {
-  //     console.log("saving")
-  //     if (err)
-  //       res.send(err);
-  //     res.json({
-  //       message: 'Primate won once'
-  //     });
-  //   })
-  // })
+  router.route('/increment-win/:obj_id')
 
   .get((req, res) => {
     Win.findById(req.params.obj_id, (err, win) => {
@@ -39,7 +28,7 @@ router.route('/increment-win/:obj_id')
       res.json(win);
     });
   })
-// 5a8f154f78482e22f85deea5
+
   .post((req, res) => {
     console.log(req.params.obj_id)
   Win.findById(req.params.obj_id, (err, win) => {

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import random from './random.js';
 import axios from 'axios'
-const dbref = {
+const dbref = {  //Our list of parameters
   fish: "5a8f240f4af70b24d36df962",
   dogs: "5a8f247328bb6524e8db5c20",
   cats: "5a8f24ae2ba93c24f9ebd131",
@@ -17,7 +17,7 @@ const dbref = {
 
 class App extends Component {
   constructor() {
-    super()
+    super()           //Our state items
     this.onClickOne = this.onClickOne.bind(this);
     this.onClickTwo = this.onClickTwo.bind(this);
     this.state = {
@@ -27,16 +27,16 @@ class App extends Component {
       countOne: 0,
       countTwo: 0,
       message: "",
-      ranNum: random.getRandomInt(1, 1),
+      ranNum: random.getRandomInt(1, 50),
       fighterOne: "",
       fighterTwo: ""
     }
   }
 
 
-onClickOne(e) {
+onClickOne(e) {     //Click function one
   console.log(this.state.ranNum)
-  if (this.state.countOne === this.state.ranNum){
+  if (this.state.countOne === (this.state.ranNum-1)){
     this.setState({
       message: 'Fighter One Wins!'
     })
@@ -44,18 +44,21 @@ onClickOne(e) {
       console.log("works")
     })
     document.getElementById('fO').style.display = "none";
+    document.getElementById('fT').style.display = "none";
     } else {
     this.setState({
       countOne: this.state.countOne + 1
     })
   }
 }
-onClickTwo(e) {
+onClickTwo(e) {      //Click function two
   console.log(this.state.ranNum)
-  if (this.state.countTwo === this.state.ranNum){
+  if (this.state.countTwo === (this.state.ranNum-1)){
     this.setState({
       message: 'Fighter Two Wins!'
     })
+    document.getElementById('fO').style.display = "none";
+    document.getElementById('fT').style.display = "none";
   } else {
     this.setState({
       countTwo: this.state.countTwo + 1
@@ -63,27 +66,14 @@ onClickTwo(e) {
    }
  }
 
-
-componentShouldUpdate() {
-  if (this.state.countTwo === this.state.ranNum) {
-    this.setState({
-      message: 'Fighter Two Wins!'
-    })
-  } else if (this.state.countOne === this.state.ranNum) { 
-    this.setState({
-      message: 'Fighter One Wins'
-    })
-  }
-}
-
   componentDidMount() {
-    console.log(random.getRandomInt(1, 10))
-    this.callToPixabay()
+    console.log(random.getRandomInt(1, 10)) //This is for chooseing which parameter to use
+    this.callToPixabay() //Our call to our API
     .then((res) => {
       console.log(res.body)
       this.setState({
         playerOneURL: res.body.hits[Math.floor(Math.random() * 49)].webformatURL,
-        fighterOne: res.searchParamater
+        fighterOne: res.searchParamater //The picture we get for our playerOne
       })
     })
     .catch(err => console.error(err))
@@ -93,7 +83,7 @@ componentShouldUpdate() {
       console.log(res.body)
       this.setState({
         playerTwoURL: res.body.hits[Math.floor(Math.random() * 49)].webformatURL,
-        fighterTwo: res.searchParamater
+        fighterTwo: res.searchParamater //The picture we get for playerTwo
       })
     })
     .catch(err => console.error(err))
@@ -101,11 +91,11 @@ componentShouldUpdate() {
 
   getAnimalArr () {
     const animalArr = ['fish', 'dogs', 'cats', 'dinosaurs', 'birds', 'rodents', 'reptiles', 'insects', 'primate'];
-    return animalArr[Math.floor(Math.random() * animalArr.length)]
+    return animalArr[Math.floor(Math.random() * animalArr.length)] //Our array of parameters
   }
 
   callApi = async () => {
-    const response = await fetch('localhost:5000/api/hello');
+    const response = await fetch('localhost:5000/api/hello'); //Our call to our local APIs
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -113,7 +103,7 @@ componentShouldUpdate() {
     return body;
   };
 
-  callToPixabay = async () => {
+  callToPixabay = async () => { //Our main call to the Pixabay API
     const apiKey = 'https://pixabay.com/api/?key=8108440-7022e5e45a6d1378cd0d81f25&q=';
     const searchParamater = this.getAnimalArr()
     const pictureType = '&image_type=photo&page=1&per_page=50';
@@ -129,7 +119,7 @@ componentShouldUpdate() {
     };
   };
 
-  render() {
+  render() {    //Our render of all of our objects.
     return (
       <div className="App">
         <header className="App-header">
